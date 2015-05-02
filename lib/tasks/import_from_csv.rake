@@ -13,4 +13,19 @@ namespace :import_from_csv do
     end
     puts "#{record_count} users created."
   end
+
+  task :locations => :environment do
+    file_name = ENV['FILENAME']
+    file_path = Rails.root + "lib/csv" + file_name
+    record_count = 0
+    CSV.foreach(file_path, headers: true, header_converters: :symbol) do |row|
+      location = Location.new(row.to_h)
+      if location.save
+        record_count += 1
+      end
+
+      puts "Processed #{record_count} rows" if record_count % 100 == 0
+    end
+    puts "#{record_count} location records created."
+  end
 end
