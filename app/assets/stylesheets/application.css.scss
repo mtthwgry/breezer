@@ -43,13 +43,11 @@ body * {
   background-color: #071431;
   left: 0;
   bottom: 0;
-  padding-bottom: 182px; /* Allows all content in the ul.user-list to show */
+  padding-bottom: 182px; /* Allows all content in ul.user-list to show when scrolling */
 }
 
 .top {
   background-color: rgba(29,194,141,0.85);
-  /*background-color: rgba(248,146,46,0.85);*/
-  /*background-color: rgba(7,20,49,0.85);*/
   height: 60px;
   z-index: 999;
 }
@@ -63,7 +61,6 @@ body * {
   padding: 75px 0;
   text-align: center;
   font-size: 28px;
-  text-transform: uppercase;
   a {
     text-decoration: none;
     color: #1DC28D;
