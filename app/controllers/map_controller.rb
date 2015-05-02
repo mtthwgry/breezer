@@ -1,5 +1,6 @@
 class MapController < ApplicationController
-  def map
+  def index
+    @users = User.order(name: :asc)
     render :text => "", :layout => true
   end
 end
