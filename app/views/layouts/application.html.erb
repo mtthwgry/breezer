@@ -10,36 +10,15 @@
   <meta name="viewport" content="initial-scale=1">
 </head>
 <body>
-<nav class="fixed left">
+<nav class="fixed main">
   <div class="brand">
   <a href="/">breezer</a>
   </div>
   <div class="users">
-    <ul class="user-list">
-      <li>User 1</li>
-      <li>User 2</li>
-      <li>User 3</li>
-      <li>User 4</li>
-      <li>User 5</li>
-      <li>User 6</li>
-      <li>User 7</li>
-      <li>User 8</li>
-      <li>User 9</li>
-      <li>User 10</li>
-      <li>User 1</li>
-      <li>User 2</li>
-      <li>User 3</li>
-      <li>User 4</li>
-      <li>User 5</li>
-      <li>User 6</li>
-      <li>User 7</li>
-      <li>User 8</li>
-      <li>User 9</li>
-      <li>User 10</li>
-    </ul>
+    <%= render partial: "map/users_list" %>
   </div>
 </nav>
-<nav class="fixed top">Options</nav>
+<!-- <nav class="fixed filters">Filter options</nav> -->
 <section id="map"></section>
 </body>
 </html>
