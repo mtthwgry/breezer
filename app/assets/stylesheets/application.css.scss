@@ -17,6 +17,7 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 
 html, body {
+  overflow: hidden; /* Prevents scroll bounce */
   height: 100%;
 }
 
@@ -31,7 +32,7 @@ body, * {
 
 body * {
   box-sizing: border-box;
-  transition: all 0.3s;
+  transition: all 0.4s;
 }
 
 .fixed {
@@ -39,6 +40,7 @@ body * {
 }
 
 .left {
+  background-color: #2A364E;
   left: 0;
   bottom: 0;
   padding-bottom: 182px; /* Allows all content in the ul.user-list to show */
@@ -58,7 +60,6 @@ body * {
 }
 
 .brand {
-  background-color: rgba(7,20,49,0.85);
   padding: 75px 0;
   text-align: center;
   font-size: 28px;
@@ -72,17 +73,25 @@ body * {
 .users {
   height: 100%;
   overflow-y: scroll;
+  border-top: 1px solid #121C2F;
 }
 
 ul.user-list {
   list-style: none;
   li {
     background-color: #2A364E;
-    height: 80px;
     border-top: 1px solid #3C4D6F;
+    color: #F8922E;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 30px 0;
   }
   li:hover {
-    background-color: #5D6678;
+    background-color: #1DC28D;
+    color: #FFF;
+  }
+  li:first-child {
+    border: none;
   }
 }
 
