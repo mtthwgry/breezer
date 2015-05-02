@@ -40,14 +40,14 @@ body * {
 }
 
 .left {
-  background-color: #2A364E;
+  background-color: #071431;
   left: 0;
   bottom: 0;
   padding-bottom: 182px; /* Allows all content in the ul.user-list to show */
 }
 
 .top {
-  background-color: rgba(29,194,141,0.75);
+  background-color: rgba(29,194,141,0.85);
   /*background-color: rgba(248,146,46,0.85);*/
   /*background-color: rgba(7,20,49,0.85);*/
   height: 60px;
@@ -73,7 +73,19 @@ body * {
 .users {
   height: 100%;
   overflow-y: scroll;
-  border-top: 1px solid #121C2F;
+  border-top: 5px solid #1DC28D;
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+  &::-webkit-scrollbar-track {
+    background-color: #1B2231;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #3E5074;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #475B85;
+  }
 }
 
 ul.user-list {
@@ -85,13 +97,13 @@ ul.user-list {
     text-align: center;
     text-transform: uppercase;
     padding: 30px 0;
-  }
-  li:hover {
-    background-color: #1DC28D;
-    color: #FFF;
-  }
-  li:first-child {
-    border: none;
+    &:hover {
+      background-color: #1DC28D;
+      color: #071431;
+    }
+    &:first-child {
+      border: none;
+    }
   }
 }
 
