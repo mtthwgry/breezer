@@ -2,23 +2,20 @@ require 'rails_helper'
 
 describe Location do
   describe "Validations" do
-    let(:location) { Location.create }
     describe "user_id" do
-      it "can't be blank" do
-        expect(location.errors).to include(:user_id)
-      end
+      it { should validate_presence_of :user_id }
     end
 
     describe "latitude" do
-      it "can't be blank" do
-        expect(location.errors).to include(:latitude)
-      end
+      it { should validate_presence_of :latitude }
     end
 
     describe "longitude" do
-      it "can't be blank" do
-        expect(location.errors).to include(:longitude)
-      end
+      it { should validate_presence_of :longitude }
     end
+  end
+
+  describe "Associations" do
+    it { should belong_to :user }
   end
 end
