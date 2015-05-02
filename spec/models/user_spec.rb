@@ -2,18 +2,15 @@ require 'rails_helper'
 
 describe User do
   describe "Validations" do
-    let(:user) { User.create }
     describe "name" do
-      it "can't be blank" do
-        expect(user.errors).to include(:name)
-      end
+      it { should validate_presence_of :name }
+      it { should validate_uniqueness_of :name }
+    end
+  end
 
-      it "must be unique" do
-        user.name = "Matthew"
-        user.save
-        user2 = User.create(name: "Matthew")
-        expect(user2.errors).to include(:name)
-      end
+  describe "Associations" do
+    describe "locations" do
+      it { should have_many(:locations) }
     end
   end
 end
