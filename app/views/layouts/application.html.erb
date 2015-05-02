@@ -2,13 +2,44 @@
 <html>
 <head>
   <title>Breezer</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox.js/v2.1.9/mapbox.css' rel='stylesheet' />
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="initial-scale=1">
 </head>
 <body>
-
-<%= yield %>
-
+<nav class="fixed left">
+  <div class="brand">
+  <a href="/">Breezer</a>
+  </div>
+  <div class="users">
+    <ul class="user-list">
+      <li>User 1</li>
+      <li>User 2</li>
+      <li>User 3</li>
+      <li>User 4</li>
+      <li>User 5</li>
+      <li>User 6</li>
+      <li>User 7</li>
+      <li>User 8</li>
+      <li>User 9</li>
+      <li>User 10</li>
+      <li>User 1</li>
+      <li>User 2</li>
+      <li>User 3</li>
+      <li>User 4</li>
+      <li>User 5</li>
+      <li>User 6</li>
+      <li>User 7</li>
+      <li>User 8</li>
+      <li>User 9</li>
+      <li>User 10</li>
+    </ul>
+  </div>
+</nav>
+<nav class="fixed top">Options</nav>
+<section id="map"></section>
 </body>
 </html>
