@@ -1,7 +1,6 @@
 class MapController < ApplicationController
   def index
     @users = User.order(name: :asc)
-    render :text => "", :layout => true
   end
 
   def all_locations_for_user

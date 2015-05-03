@@ -10,15 +10,6 @@
   <meta name="viewport" content="initial-scale=1">
 </head>
 <body>
-<nav class="fixed main">
-  <div class="brand">
-  <a href="/">breezer</a>
-  </div>
-  <div class="users">
-    <%= render partial: "map/users_list" %>
-  </div>
-</nav>
-<!-- <nav class="fixed filters">Filter options</nav> -->
-<section id="map"></section>
+<%= yield %>
 </body>
 </html>
