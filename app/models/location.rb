@@ -6,6 +6,11 @@ class Location < ActiveRecord::Base
   validates :longitude, presence: true
 
   def to_geojson
+    transaction = self.user.transactions.where(created_at: self.created_at)[0]
+    transaction_json = if transaction
+      {type: transaction.type, amount: transaction.amount.to_f}
+    end
+
     {
       type: 'Feature',
       geometry: {
@@ -13,9 +18,10 @@ class Location < ActiveRecord::Base
         coordinates: [self.longitude, self.latitude]
       },
       properties: {
-        id: self.id,
+        created_at: self.created_at,
         user_id: self.user_id,
-        name: self.user.name
+        name: self.user.name,
+        transaction: transaction_json || {}
       }
     }
   end

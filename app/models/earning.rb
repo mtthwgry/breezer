@@ -1,0 +1,3 @@
+class Earning < Transaction
+
+end
