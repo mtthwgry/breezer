@@ -11,6 +11,9 @@ describe User do
   describe "Associations" do
     describe "locations" do
       it { should have_many(:locations) }
+      it { should have_many(:transactions) }
+      it { should have_many(:charges) }
+      it { should have_many(:earnings) }
     end
   end
 end

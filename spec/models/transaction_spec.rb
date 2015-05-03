@@ -26,4 +26,8 @@ describe Transaction do
       expect(types).to include("Earning")
     end
   end
+
+  describe "Associations" do
+    it { should belong_to :user }
+  end
 end
