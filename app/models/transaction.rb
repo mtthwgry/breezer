@@ -3,6 +3,8 @@ class Transaction < ActiveRecord::Base
     %w( Charge Earning ).freeze
   end
 
+  belongs_to :user
+
   validates :user_id, presence: true
   validates :amount, presence: true
   validates :type, presence: true, inclusion: { in: Transaction.types,
