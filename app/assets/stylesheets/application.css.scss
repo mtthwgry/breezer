@@ -18,6 +18,7 @@
 
 $breeze-blue: #071431;
 $breeze-green: #1DC28D;
+$breeze-orange: #F8922E;
 $desaturated-blue: #2A364E;
 
 html, body {
@@ -70,25 +71,9 @@ body * {
     color: $breeze-green;
     background-color: $desaturated-blue;
 
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $desaturated-blue;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: lighten($desaturated-blue, 10%);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: lighten($desaturated-blue, 20%);
-    }
-
     p {
       background-color: $desaturated-blue;
-      border-bottom: 1px solid $breeze-blue;
+      border-bottom: 1px solid lighten($desaturated-blue, 7%);
       font-size: 13px;
       padding: 8px 0;
       position: fixed;
@@ -112,6 +97,18 @@ body * {
     &:first-child {
       border: none;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: none;
+    }
+  }
+
+  .active {
+    background-color: $breeze-green;
+    color: $breeze-blue;
+    border-top: 1px solid lighten($breeze-green, 7%);
   }
 }
 
