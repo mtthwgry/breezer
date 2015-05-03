@@ -15,7 +15,7 @@ class Location < ActiveRecord::Base
       properties: {
         id: self.id,
         user_id: self.user_id,
-        name: self.user.name,
+        name: self.user.name
       }
     }
   end
