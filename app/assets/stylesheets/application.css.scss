@@ -36,7 +36,7 @@ body, * {
   padding: 0;
 }
 
-body * {
+* {
   box-sizing: border-box;
   transition: all 0.4s;
 }
@@ -106,9 +106,8 @@ body * {
   }
 
   .active {
-    background-color: $breeze-green;
-    color: $breeze-blue;
-    border-top: 1px solid lighten($breeze-green, 7%);
+    color: #000;
+    border-top: 1px solid $breeze-green;
   }
 }
 
@@ -174,10 +173,10 @@ body * {
   }
 
   .main {
-    height: 35%;
+    height: 40%;
     width: 100%;
     z-index: 9999;
-    padding-bottom: 72px;
+    padding-bottom: 63px;
 
     .brand {
       padding: 10px 0;
@@ -185,6 +184,6 @@ body * {
   }
 
   #map {
-    height: 65%;
+    height: 60%;
   }
 }

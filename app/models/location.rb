@@ -16,7 +16,6 @@ class Location < ActiveRecord::Base
         id: self.id,
         user_id: self.user_id,
         name: self.user.name,
-        'marker-color': '#' + ("%06x" % (rand * 0xffffff))
       }
     }
   end
