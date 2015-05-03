@@ -18,6 +18,7 @@
 
 $breeze-blue: #071431;
 $breeze-green: #1DC28D;
+$breeze-orange: #F8922E;
 $desaturated-blue: #2A364E;
 
 html, body {
@@ -35,7 +36,7 @@ body, * {
   padding: 0;
 }
 
-body * {
+* {
   box-sizing: border-box;
   transition: all 0.4s;
 }
@@ -70,25 +71,9 @@ body * {
     color: $breeze-green;
     background-color: $desaturated-blue;
 
-    &::-webkit-scrollbar {
-      width: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      background-color: $desaturated-blue;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: lighten($desaturated-blue, 10%);
-    }
-
-    &::-webkit-scrollbar-thumb:hover {
-      background-color: lighten($desaturated-blue, 20%);
-    }
-
     p {
       background-color: $desaturated-blue;
-      border-bottom: 1px solid $breeze-blue;
+      border-bottom: 1px solid lighten($desaturated-blue, 7%);
       font-size: 13px;
       padding: 8px 0;
       position: fixed;
@@ -112,6 +97,17 @@ body * {
     &:first-child {
       border: none;
     }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: none;
+    }
+  }
+
+  .active {
+    color: #000;
+    border-top: 1px solid $breeze-green;
   }
 }
 
@@ -177,10 +173,10 @@ body * {
   }
 
   .main {
-    height: 35%;
+    height: 40%;
     width: 100%;
     z-index: 9999;
-    padding-bottom: 72px;
+    padding-bottom: 63px;
 
     .brand {
       padding: 10px 0;
@@ -188,6 +184,6 @@ body * {
   }
 
   #map {
-    height: 65%;
+    height: 60%;
   }
 }

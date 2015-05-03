@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'map#index'
 
+  get "/all_locations/:id" => 'map#all_locations_for_user'
+
+  get "/all_locations" => 'map#all_locations'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
