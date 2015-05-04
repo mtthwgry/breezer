@@ -209,6 +209,14 @@ ul {
   .leaflet-popup-tip {
     border-top-color: $breeze-green;
   }
+
+  a.leaflet-popup-close-button {
+    background-color: $breeze-green;
+
+    &:hover {
+      background-color: lighten($breeze-green, 15%);
+    }
+  }
 }
 
 @media screen and (min-width: 800px) {
