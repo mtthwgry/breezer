@@ -196,6 +196,14 @@ ul {
       text-transform: uppercase;
       text-align: center;
     }
+
+    .charge {
+      color: red;
+    }
+
+    .earning {
+      color: $breeze-green;
+    }
   }
 
   .leaflet-popup-tip {
