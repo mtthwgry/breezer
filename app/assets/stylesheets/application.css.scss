@@ -140,7 +140,7 @@ ul {
   }
 
   .active {
-    border-top: 1px solid $breeze-green;
+    border-top: 1px solid lighten($breeze-orange, 8%);
     color: $dark-gray;
   }
 }
