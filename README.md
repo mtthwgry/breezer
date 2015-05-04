@@ -33,6 +33,6 @@ Visit http://localhost:3000 in your browser of choice.
 
 ## Contact
 Matthew Gray
-Email: matthew (at) mtthwgry (dot) com
-Twitter: [@mtthwgry](http://twitter.com/mtthwgry)
-Blog: [www.mtthwgry.com](http://www.mtthwgry.com)
+Email: matthew (at) mtthwgry (dot) com  
+Twitter: [@mtthwgry](http://twitter.com/mtthwgry)  
+Blog: [www.mtthwgry.com](http://www.mtthwgry.com)  
