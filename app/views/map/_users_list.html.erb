@@ -1,6 +1,6 @@
-<p>filter by user</p>
+<p>filter by user | <%= link_to "deselect all", '#', id: 'deselect' %></p>
 <ul class="user-list">
   <% @users.each do |user| %>
-    <li class="user-list-item"><a href="#" data-user-id=<%= user.id %>><%= user.name %></a></li>
+    <li class="user-list-item"><%= link_to user.name, '#', data: {'user-id': user.id} %></li>
   <% end %>
 </ul>
