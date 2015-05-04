@@ -197,6 +197,10 @@ ul {
       text-align: center;
     }
   }
+
+  .leaflet-popup-tip {
+    border-top-color: $breeze-green;
+  }
 }
 
 @media screen and (min-width: 800px) {
