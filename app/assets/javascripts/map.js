@@ -23,16 +23,33 @@ $(document).on("ready", function() {
       obj.properties['marker-color'] = userColors[userId];
 
 
-      if (transactionType === "Charge") {
-        obj.properties['marker-color'] = "#e31c1c"
+      if (transactionType === 'Charge') {
+        obj.properties['marker-color'] = '#e31c1c'
         obj.properties['marker-symbol'] = 'bank';
-      } else if (transactionType === "Earning") {
-        obj.properties['marker-color'] = "#07db43"
+      } else if (transactionType === 'Earning') {
+        obj.properties['marker-color'] = '#07db43'
         obj.properties['marker-symbol'] = 'bank';
       }
     });
 
     this.addTo(map);
+  });
+
+  // Add popups to markers
+  featureLayer.on('layeradd', function(e) {
+    var layer = e.layer,
+        properties = layer.feature.properties,
+        transaction = properties.transaction;
+
+    var content = '<p>' + properties.name + ' | ' + properties.created_at + '</p>';
+
+    if (transaction.type == 'Charge') {
+      content = content + '<p class="charge">−' + transaction.amount + '</p>';
+    } else if (transaction.type == 'Earning') {
+      content = content + '<p class="earning">+' + transaction.amount + '</p>';
+    }
+
+    layer.bindPopup(content);
   });
 
   // This will keep track of which users filters have been clicked
@@ -42,26 +59,25 @@ $(document).on("ready", function() {
       filterOther = false;
 
   $('.filters input[type="checkbox"]').click(function() {
-    $(this).closest('li').toggleClass('active');
-    var id = $(this).attr('id');
+    var $li = $(this).closest('li'),
+        id = $(this).attr('id');
+
+    if ($(this).attr('id') === 'charges-filter') {
+      $li.toggleClass('charge');
+    } else if ($(this).attr('id') === 'earnings-filter') {
+      $li.toggleClass('earning');
+    }
 
     // Updates the filter flag
-    if (id === "charges-filter") {
+    if (id === 'charges-filter') {
       filterCharges = !filterCharges;
-    } else if(id === "earnings-filter") {
+    } else if(id === 'earnings-filter') {
       filterEarnings = !filterEarnings;
-    } else if(id === "other-filter") {
+    } else if(id === 'other-filter') {
       filterOther = !filterOther;
     }
 
-    featureLayer.setFilter(function(f) {
-      return filter(f);
-    });
-
-    // Re-zoom only if zoomed out
-    if (map.getZoom() < 12) {
-      map.fitBounds(featureLayer.getBounds);
-    }
+    filterMarkers();
   });
 
   $('.user-list').on('click', '.user-list-item a', function(event) {
@@ -82,15 +98,28 @@ $(document).on("ready", function() {
     }
 
     // Now filter the markers
-    featureLayer.setFilter(function(f) {
-      return filter(f)
-    });
+    filterMarkers();
 
     // If the map is zoomed out and only one user is being filtered, re-zoom the map
     if (map.getZoom() < 8) {
       map.fitBounds(featureLayer.getBounds());
     }
   });
+
+  $('#deselect').click(function(e) {
+    e.preventDefault();
+
+    usersOn = [];
+    $('.user-list-item').css('background-color', '').removeClass('active');
+
+    filterMarkers();
+  })
+
+  var filterMarkers = function() {
+    featureLayer.setFilter(function(f) {
+      return filter(f)
+    });
+  }
 
   var filter = function(marker) {
     // When filtering both charges and earnings
@@ -109,7 +138,7 @@ $(document).on("ready", function() {
   var filterByCharges = function(marker) {
     var charge = true;
     if (filterCharges) {
-      charge = marker.properties.transaction.type === "Charge";
+      charge = marker.properties.transaction.type === 'Charge';
     }
     return charge;
   }
@@ -117,7 +146,7 @@ $(document).on("ready", function() {
   var filterByEarnings = function(marker) {
     var earning = true;
     if (filterEarnings) {
-      earning = marker.properties.transaction.type === "Earning";
+      earning = marker.properties.transaction.type === 'Earning';
     }
     return earning;
   }
