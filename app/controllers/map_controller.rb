@@ -3,13 +3,14 @@ class MapController < ApplicationController
     @users = User.order(name: :asc)
   end
 
-  def all_locations_for_user
-    @locations = Location.where(user_id: params[:id])
-    render json: @locations.map(&:to_geojson)
-  end
-
   def all_locations
+    geo_json = []
+
     @locations = Location.all
-    render json: @locations.map(&:to_geojson)
+    @locations.each do |location|
+      geo_json << GeoJsonPresenter.new(location).to_geojson
+    end
+
+    render json: geo_json
   end
 end
