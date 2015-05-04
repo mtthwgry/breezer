@@ -17,9 +17,13 @@
 @import url(http://fonts.googleapis.com/css?family=Ubuntu:400,700);
 
 $breeze-blue: #071431;
+$breeze-blue-transparent: rgba(7,20,49,0.75);
+$breeze-blue-popup: rgba(7,20,49,0.85);
 $breeze-green: #1DC28D;
 $breeze-orange: #F8922E;
 $desaturated-blue: #2A364E;
+$gray: #999;
+$dark-gray: #333;
 
 html, body {
   // Prevents scroll bounce in modern browsers
@@ -45,24 +49,37 @@ ul {
   list-style: none;
 }
 
+.charge {
+  color: red;
+}
+
+.earning {
+  color: $breeze-green;
+}
+
 .fixed {
   position: fixed;
 }
 
 .main {
-  background-color: $breeze-blue;
   left: 0;
   bottom: 0;
   // Allows all content in ul.user-list to show when scrolling
   padding-bottom: 183px;
+  background-color: $breeze-blue;
 
   .brand {
     padding: 70px 0;
-    text-align: center;
     font-size: 38px;
+    text-align: center;
+
     a {
-      text-decoration: none;
       color: $breeze-green;
+      text-decoration: none;
+
+      &:hover {
+        color: darken($breeze-green, 10%);
+      }
     }
   }
 
@@ -70,17 +87,27 @@ ul {
     position: relative;
     height: 100%;
     overflow-y: scroll;
+    background-color: $desaturated-blue;
+    color: $breeze-green;
     text-align: center;
     text-transform: uppercase;
-    color: $breeze-green;
-    background-color: $desaturated-blue;
+    letter-spacing: 1px;
 
     p {
-      background-color: $desaturated-blue;
-      border-bottom: 1px solid lighten($desaturated-blue, 7%);
-      font-size: 13px;
-      padding: 8px 0;
       position: fixed;
+      padding: 8px 0;
+      border-bottom: 1px solid lighten($desaturated-blue, 7%);
+      background-color: $desaturated-blue;
+      font-size: 13px;
+    }
+
+    a {
+      color: $breeze-green;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }
@@ -89,8 +116,8 @@ ul {
   padding-top: 31px;
 
   li {
-    border-top: 1px solid lighten($desaturated-blue, 7%);
     padding: 30px 0;
+    border-top: 1px solid lighten($desaturated-blue, 7%);
 
     &:hover {
       background-color: $breeze-green;
@@ -105,29 +132,34 @@ ul {
       text-decoration: none;
       color: inherit;
       transition: none;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 
   .active {
-    color: #000;
     border-top: 1px solid $breeze-green;
+    color: $dark-gray;
   }
 }
 
 .filters {
-  background-color: rgba(7, 20, 49,0.75);
   z-index: 999;
   height: 60px;
-  line-height: 60px;
-  font-size: 12px;
   padding: 0 20px;
-  color: $breeze-green;
+  background-color: $breeze-blue-transparent;
+  color: $gray;
+  font-size: 12px;
+  line-height: 60px;
   text-transform: uppercase;
 
   span {
-    letter-spacing: 0.05em;
+    color: $breeze-green;
     font-size: 16px;
     font-weight: bold;
+    letter-spacing: 0.05em;
   }
 
   ul {
@@ -145,15 +177,26 @@ ul {
       margin-right: 6px;
     }
   }
-
-  .active {
-    color: lighten($breeze-green, 25%);
-  }
 }
 
 #map {
   top: 0;
   transition: none;
+
+  .leaflet-popup-content-wrapper {
+    font-family: 'Ubuntu', sans-serif;
+    border: 1px solid $breeze-green;
+    background-color: $breeze-blue-transparent;
+
+    p {
+      color: white;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-align: center;
+      text-transform: uppercase;
+      text-align: center;
+    }
+  }
 }
 
 @media screen and (min-width: 800px) {
@@ -210,9 +253,9 @@ ul {
   }
 
   .main {
+    z-index: 9999;
     height: 40%;
     width: 100%;
-    z-index: 9999;
     padding-bottom: 63px;
 
     .brand {

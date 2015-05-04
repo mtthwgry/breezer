@@ -1,12 +1,10 @@
 $(document).on("ready", function() {
   L.mapbox.accessToken = 'pk.eyJ1IjoibXR0aHdncnkiLCJhIjoibW82OTJicyJ9.ykVo84aS5xtK3jPy_iX6Sg';
 
-  var map = L.mapbox.map('map', 'mtthwgry.bcb9b827', { zoomControl: false })
-  .setView([37.771167, -122.402504], 12);
+  var map = L.mapbox.map('map', 'mtthwgry.bcb9b827', { zoomControl: false }).setView([37.771167, -122.402504], 12);
 
-  var featureLayer = L.mapbox.featureLayer().loadURL('/all_locations');
-
-  var userColors = {};
+  var featureLayer = L.mapbox.featureLayer().loadURL('/all_locations'),
+      userColors = {};
 
   featureLayer.on('ready', function(e) {
     // Don't display markers until a user filter has been clicked
@@ -21,20 +19,37 @@ $(document).on("ready", function() {
       var userId = obj.properties.user_id,
           transactionType = obj.properties.transaction.type;
 
-      userColors[userId] = userColors[userId] || randomColor();
+      userColors[userId] = userColors[userId] || randomColor({hue: 'orange', luminosity: 'dark'});
       obj.properties['marker-color'] = userColors[userId];
 
 
-      if(transactionType === "Charge") {
-        obj.properties['marker-color'] = "#e31c1c"
+      if (transactionType === 'Charge') {
+        obj.properties['marker-color'] = '#e31c1c'
         obj.properties['marker-symbol'] = 'bank';
-      } else if (transactionType === "Earning") {
-        obj.properties['marker-color'] = "#07db43"
+      } else if (transactionType === 'Earning') {
+        obj.properties['marker-color'] = '#07db43'
         obj.properties['marker-symbol'] = 'bank';
       }
     });
 
     this.addTo(map);
+  });
+
+  // Add popups to markers
+  featureLayer.on('layeradd', function(e) {
+    var layer = e.layer,
+        properties = layer.feature.properties,
+        transaction = properties.transaction;
+
+    var content = '<p>' + properties.name + ' | ' + properties.created_at + '</p>';
+
+    if (transaction.type == 'Charge') {
+      content = content + '<p class="charge">−' + transaction.amount + '</p>';
+    } else if (transaction.type == 'Earning') {
+      content = content + '<p class="earning">+' + transaction.amount + '</p>';
+    }
+
+    layer.bindPopup(content);
   });
 
   // This will keep track of which users filters have been clicked
@@ -44,26 +59,25 @@ $(document).on("ready", function() {
       filterOther = false;
 
   $('.filters input[type="checkbox"]').click(function() {
-    $(this).closest('li').toggleClass('active');
-    var id = $(this).attr('id');
+    var $li = $(this).closest('li'),
+        id = $(this).attr('id');
+
+    if ($(this).attr('id') === 'charges-filter') {
+      $li.toggleClass('charge');
+    } else if ($(this).attr('id') === 'earnings-filter') {
+      $li.toggleClass('earning');
+    }
 
     // Updates the filter flag
-    if(id === "charges-filter") {
+    if (id === 'charges-filter') {
       filterCharges = !filterCharges;
-    } else if(id === "earnings-filter") {
+    } else if(id === 'earnings-filter') {
       filterEarnings = !filterEarnings;
-    } else if(id === "other-filter") {
+    } else if(id === 'other-filter') {
       filterOther = !filterOther;
     }
 
-    featureLayer.setFilter(function(f) {
-      return filter(f);
-    });
-
-    // Re-zoom only if zoomed out
-    if(map.getZoom() < 12) {
-      map.fitBounds(featureLayer.getBounds);
-    }
+    filterMarkers();
   });
 
   $('.user-list').on('click', '.user-list-item a', function(event) {
@@ -75,7 +89,7 @@ $(document).on("ready", function() {
     $userListItem.toggleClass('active');
 
     // Set the background color according to the user's filter status
-    if(index > -1) {
+    if (index > -1) {
       $userListItem.css('background-color', '');
       usersOn.splice(index, 1);
     } else {
@@ -84,19 +98,32 @@ $(document).on("ready", function() {
     }
 
     // Now filter the markers
-    featureLayer.setFilter(function(f) {
-      return filter(f)
-    });
+    filterMarkers();
 
     // If the map is zoomed out and only one user is being filtered, re-zoom the map
-    if(map.getZoom() < 8) {
+    if (map.getZoom() < 8) {
       map.fitBounds(featureLayer.getBounds());
     }
   });
 
+  $('#deselect').click(function(e) {
+    e.preventDefault();
+
+    usersOn = [];
+    $('.user-list-item').css('background-color', '').removeClass('active');
+
+    filterMarkers();
+  })
+
+  var filterMarkers = function() {
+    featureLayer.setFilter(function(f) {
+      return filter(f)
+    });
+  }
+
   var filter = function(marker) {
     // When filtering both charges and earnings
-    if(filterCharges && filterEarnings) {
+    if (filterCharges && filterEarnings) {
       return filterByUser(marker) && (filterByCharges(marker) || filterByEarnings(marker));
     }
 
@@ -110,16 +137,16 @@ $(document).on("ready", function() {
 
   var filterByCharges = function(marker) {
     var charge = true;
-    if(filterCharges) {
-      charge = marker.properties.transaction.type === "Charge";
+    if (filterCharges) {
+      charge = marker.properties.transaction.type === 'Charge';
     }
     return charge;
   }
 
   var filterByEarnings = function(marker) {
     var earning = true;
-    if(filterEarnings) {
-      earning = marker.properties.transaction.type === "Earning";
+    if (filterEarnings) {
+      earning = marker.properties.transaction.type === 'Earning';
     }
     return earning;
   }
