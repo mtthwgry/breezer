@@ -18,8 +18,4 @@ describe Location do
   describe "Associations" do
     it { should belong_to :user }
   end
-
-  describe '#to_geojson' do
-    xit "formats the object as valid GeoJSON"
-  end
 end
