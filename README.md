@@ -1,7 +1,7 @@
 # breezer
 This is an application built for [Breeze's engineering challenge](http://www.github.com/joinbreeze/map-challenge). It visualizes the dataset through an interactive map-based interface. You can filter markers by user and transaction type. Clicking on a name will add that user's markers to the map. Each user is given a randomly generated color that corresponds to markers on the map.
 
-I used a combination of mobile and responsive design for this project. No HTML/CSS frameworks were used.
+I used responsive design for this project. No HTML/CSS frameworks were used.
 
 ## Use
 After cloning the repo to your computer, you will need to run the following from the applications root directory:
